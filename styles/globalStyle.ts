@@ -14,6 +14,11 @@ a {
     text-decoration: none;
 }
 
+ul {
+    list-style: none;
+    padding: 0;
+}
+
 * {
     box-sizing: border-box;
 }`
