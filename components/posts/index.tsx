@@ -20,7 +20,7 @@ export default function Posts() {
             {posts.map(post => (
                 <PostItem key={post.id}>
                     <img src={post.cover} alt=""/>
-                    <h1>{post.title}</h1>
+                    <a href={`/posts/${post.id}`}><h1>{post.title}</h1></a>
                     <h3>{post.description}</h3>
                     <time dateTime={post.createdAt}>{post.createdAt}</time>
                 </PostItem>
