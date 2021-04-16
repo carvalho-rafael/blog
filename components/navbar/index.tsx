@@ -1,10 +1,14 @@
-import { NavBarContainer, Logo } from './styles'
+import { NavBarContainer, NavBarHeader } from './styles'
 
 export default function NavBar() {
     return (
         <NavBarContainer>
-            <Logo src="/logo.svg" alt="blog-logo"/>
-            <h1>Blog</h1>
+            <NavBarHeader>
+                <a href="/">
+                    <img src="/logo.svg" alt="blog-logo" />
+                    <h1>Blog</h1>
+                </a>
+            </NavBarHeader>
         </NavBarContainer>
     )
 }

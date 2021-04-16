@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const NavBarContainer = styled.header`
     display: flex;
-    align-items: center;
     height: 100px;
     width: 100%;
 
@@ -10,7 +9,15 @@ export const NavBarContainer = styled.header`
     background: ${props => props.theme.primary};
 `
 
-export const Logo = styled.img`
-    height: inherit;
-    padding: 1rem;
+export const NavBarHeader = styled.header`
+    
+    a {
+        display: flex;
+        align-items: center;
+
+        img {
+            height: 100px;
+        }
+    }
+
 `
