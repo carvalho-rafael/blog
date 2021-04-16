@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { device } from './breackpoints'
 
 export default createGlobalStyle`
 html,
@@ -6,6 +7,7 @@ html,
     padding: 0;
     margin: 0;
     font-family: 'Titillium Web', sans-serif;
+    line-height: 1.2;
 }
 
 a {
@@ -20,4 +22,12 @@ ul {
 
 * {
     box-sizing: border-box;
-}`
+}
+p {
+    font-size: 16px;
+
+    @media ${device.tablet} {
+        font-size: 18px;
+    }
+}
+`
