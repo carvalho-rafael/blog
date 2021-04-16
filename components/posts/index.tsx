@@ -19,10 +19,12 @@ export default function Posts() {
         <PostsContainer>
             {posts.map(post => (
                 <PostItem key={post.id}>
-                    <img src={post.cover} alt=""/>
-                    <a href={`/posts/${post.id}`}><h1>{post.title}</h1></a>
-                    <h3>{post.description}</h3>
-                    <time dateTime={post.createdAt}>{post.createdAt}</time>
+                    <img src={post.cover} alt="" />
+                    <div>
+                        <a href={`/posts/${post.id}`}><h1>{post.title}</h1></a>
+                        <p>{post.description}</p>
+                        <time dateTime={post.createdAt}>{post.createdAt}</time>
+                    </div>
                 </PostItem>
             ))}
         </PostsContainer>
