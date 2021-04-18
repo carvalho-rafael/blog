@@ -1,8 +1,6 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { useRouter } from 'next/router'
 import { lorem, date } from 'faker';
 import Head from 'next/head'
-import NavBar from '../../../../components/navbar'
 import PostForm from '../../../../components/postForm';
 import { Post } from '../../../../interfaces/Post';
 import Admin from '../..';
@@ -43,9 +41,3 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   }
 }
-/*
-FORM COMPONENTE
-CREATE PAGE
-EDIT PAGE
-
-FORMCONTEXT = UPDATE, CREATE, SENT, LOADING, ERROR */

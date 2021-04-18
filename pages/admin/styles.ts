@@ -10,6 +10,7 @@ export const AdmimContent = styled.div`
     }
 `
 export const SideBar = styled.nav`
+    display: none;
     width: 220px;
     min-height: calc(100vh - 80px);
 
@@ -21,6 +22,10 @@ export const SideBar = styled.nav`
 
         }
     }
+
+    @media ${device.tablet} {
+        display: block;
+    } 
 `
 export const NavBarContainer = styled.header`
     display: flex;

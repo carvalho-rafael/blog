@@ -6,17 +6,15 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label: string
 }
 
-const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({error, label, ...rest}, ref) => {
-    return(
-        <>
-        <InputContainer name={rest.name}>
+const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ error, label, ...rest }, ref) => {
+    return (
+        <InputContainer>
             <label htmlFor={rest.name}>{label}</label>
-            <input ref={ref} {...rest}/>
+            <input ref={ref} {...rest} />
             {error && (
-                <p style={{color: 'red'}}>{error}</p>
+                <p style={{ color: 'red' }}>{error}</p>
             )}
         </InputContainer>
-        </>
     )
 }
 

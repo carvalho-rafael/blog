@@ -2,6 +2,7 @@ import { useRef } from "react";
 import useForm from "../../hooks/useForm";
 import { Post } from "../../interfaces/Post";
 import Input from "./Input";
+import Select from "./select";
 import { FormContainer, InputGroup } from "./styles";
 
 interface PostFormProps {
@@ -26,8 +27,8 @@ export default function PostForm({ post }: PostFormProps) {
         <>
             <FormContainer onSubmit={handleSubmit}>
                 <InputGroup>
-                    <Input name="name" label="Name" ref={name} required />
-                    <Input name="nme" label="Name" ref={name} required />
+                    <Input name="title" label="title" type="text" ref={name} required />
+                    <Select label="categories" categories={['science', 'tecnology']}  />
                 </InputGroup>
                 <Input name="nme" label="Name" ref={name} required />
                 <button type='submit' disabled={loading}>Enviar</button>
