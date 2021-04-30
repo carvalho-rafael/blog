@@ -4,6 +4,7 @@ import { Post } from "../../interfaces/Post";
 import Input from "./Input";
 import Select from "./select";
 import { FormContainer, InputGroup } from "./styles";
+import TextEditor from "./TextEditor";
 
 interface PostFormProps {
     post?: Post
@@ -31,6 +32,7 @@ export default function PostForm({ post }: PostFormProps) {
                     <Select label="categories" categories={['science', 'tecnology']}  />
                 </InputGroup>
                 <Input name="nme" label="Name" ref={name} required />
+                <TextEditor />
                 <button type='submit' disabled={loading}>Enviar</button>
             </FormContainer>
         </>
