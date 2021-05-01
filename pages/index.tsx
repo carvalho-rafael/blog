@@ -20,7 +20,7 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
       <Main>
         <section>
           <h1>Últimas Notícias</h1>
-          <Posts />
+          <Posts posts={posts} />
         </section>
         <section>
           <h1>Mais lidas</h1>
@@ -32,15 +32,12 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
 }
 
 export const getStaticProps = async () => {
-  let posts: Post = {
-    id: 2,
-    name: 'rafael'
-  }
+  const posts = await fetch('http://localhost:3333/posts').then(posts => posts.json());
 
   return {
     props: {
       posts,
     },
-    revalidate: 1
+    revalidate: 1 * 60
   }
 }

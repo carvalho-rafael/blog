@@ -1,19 +1,8 @@
 import { PostItem, PostsContainer } from './styles';
 import { lorem, date } from 'faker';
+import Link from 'next/link'
 
-export default function Posts() {
-    let posts = [];
-
-    for (let i = 0; i < 10; i++) {
-        posts.push({
-            id: i,
-            title: lorem.sentence(9),
-            description: lorem.sentence(18),
-            body: lorem.paragraphs(3),
-            cover: 'cover.jpg',
-            createdAt: date.recent().toDateString()
-        })
-    }
+export default function Posts({posts}) {
 
     return (
         <PostsContainer>
@@ -21,7 +10,9 @@ export default function Posts() {
                 <PostItem key={post.id}>
                     <img src={post.cover} alt="" />
                     <div>
-                        <a href={`/posts/${post.id}`}><h1>{post.title}</h1></a>
+                        <Link href={`/posts/${post.id}`}>
+                            <a><h1>{post.title}</h1></a>
+                        </Link>
                         <p>{post.description}</p>
                         <time dateTime={post.createdAt}>{post.createdAt}</time>
                     </div>
