@@ -1,58 +1,33 @@
-import { PostsContainer, PostItem, SideBar, AdmimContent, NavBarContainer, NavBarHeader } from './styles'
-import { date, lorem } from "faker";
+import { SideBar, AdmimContent, NavBarContainer, NavBarHeader } from '../../styles/admin/admin'
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Admin({ children, title }) {
-    let posts = [];
-
-    for (let i = 0; i < 10; i++) {
-        posts.push({
-            id: i,
-            title: lorem.sentence(9),
-            description: lorem.sentence(18),
-            body: lorem.paragraphs(3),
-            cover: 'cover.jpg',
-            createdAt: date.recent().toDateString()
-        })
-    }
-
     return (
         <>
             <Head>
-                <title>My Blog</title>
-                <link rel="icon" href="/favicon.ico" />
+                <title>| ADMIN | {title}</title>
             </Head>
             <NavBarContainer>
                 <NavBarHeader>
-                    <a href="/admin">
-                        <h3>ADMIN - {title}</h3>
-                    </a>
+                    <Link href="/admin">
+                        <a >
+                            <h3>| ADMIN | {title}</h3>
+                        </a>
+                    </Link>
                 </NavBarHeader>
             </NavBarContainer>
             <AdmimContent>
                 <SideBar>
                     <ul>
-                        <li>Posts</li>
+                        <Link href="/admin/posts">
+                            <a>Posts</a>
+                        </Link>
                     </ul>
                 </SideBar>
-                {children ? (
-                    <main>
-                        {children}
-                    </main>
-                ) : (
-                    <PostsContainer>
-                        <h1>Posts</h1>
-                        {posts.map(post => (
-                            <PostItem key={post.id}>
-                                <img src={post.cover} alt="" />
-                                <div>
-                                    <a href={`/admin/posts/${post.id}/edit`}><h3>{post.title}</h3></a>
-                                    <time dateTime={post.createdAt}>{post.createdAt}</time>
-                                </div>
-                            </PostItem>
-                        ))}
-                    </PostsContainer>
-                )}
+                <main>
+                    {children}
+                </main>
             </AdmimContent>
         </>
     )
