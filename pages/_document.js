@@ -35,6 +35,7 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet" />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
         <body>
           <Main />
