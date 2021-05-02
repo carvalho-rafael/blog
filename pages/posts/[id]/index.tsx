@@ -1,20 +1,15 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { useRouter } from 'next/router'
-import { lorem, date } from 'faker';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head'
 import NavBar from '../../../components/navbar'
-import { PostContainer, PostHeader } from './styles';
+import { PostContainer, PostHeader } from '../../../styles/pages/posts_id';
 
 
-export default function Post({ posts }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const router = useRouter();
-  const { id } = router.query;
+export default function Post({ posts }) {
 
   return (
     <>
       <Head>
         <title>{posts.title}</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
       <PostContainer>
@@ -22,7 +17,7 @@ export default function Post({ posts }: InferGetServerSidePropsType<typeof getSe
           <h1>{posts.title}</h1>
           <p>{posts.description}</p>
           <time dateTime={posts.createdAt}>{posts.createdAt}</time>
-          <hr/>
+          <hr />
         </PostHeader>
         <p dangerouslySetInnerHTML={{ __html: posts.body }}></p>
       </PostContainer>
@@ -30,21 +25,31 @@ export default function Post({ posts }: InferGetServerSidePropsType<typeof getSe
   )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { id } = context.params
-
-  let posts = {
-    id,
-    title: lorem.words(9),
-    description: lorem.sentence(18),
-    body: lorem.paragraphs(5, '<br><br>'),
-    cover: '/cover.jpg',
-    createdAt: date.recent().toDateString()
-  }
+export const getStaticProps: GetStaticProps = async (context) => {
+  const posts = await fetch(`http://localhost:3333/posts/${context.params.id}`)
+    .then(posts => posts.json());
 
   return {
     props: {
       posts: posts,
     },
+  }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await fetch(`http://localhost:3333/posts/`)
+    .then(posts => posts.json());
+
+  const postsPaths = posts.map(post => {
+    return {
+      params: {
+        id: post.id.toString()
+      }
+    }
+  })
+
+  return {
+    paths: postsPaths,
+    fallback: false
   }
 }
