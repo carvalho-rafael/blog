@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { device } from '../../styles/breackpoints'
+import { device } from '../breackpoints'
 
 export const AdmimContent = styled.div`
     display: flex;
