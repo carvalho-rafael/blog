@@ -9,7 +9,7 @@ export default function Posts() {
 
   useEffect(() => {
     (async () => {
-      const posts = await fetch(`http://localhost:3333/posts/`)
+      const posts = await fetch(`${process.env.NEXT_PUBLIC_API}posts`)
         .then(posts => posts.json());
 
       setPosts(posts);

@@ -32,7 +32,7 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
 }
 
 export const getStaticProps = async () => {
-  const posts = await fetch('http://localhost:3333/posts').then(posts => posts.json());
+  const posts = await fetch(`${process.env.NEXT_PUBLIC_API}posts`).then(posts => posts.json());
 
   return {
     props: {

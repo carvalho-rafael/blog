@@ -10,7 +10,7 @@ export default function EditPost() {
 
   useEffect(() => {
     (async () => {
-      const post = await fetch(`http://localhost:3333/posts/${id}`)
+      const post = await fetch(`${process.env.NEXT_PUBLIC_API}posts/${id}`)
         .then(data => data.json());
 
       setPost(post);

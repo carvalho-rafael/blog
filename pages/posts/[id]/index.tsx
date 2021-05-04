@@ -26,7 +26,7 @@ export default function Post({ posts }) {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const posts = await fetch(`http://localhost:3333/posts/${context.params.id}`)
+  const posts = await fetch(`${process.env.NEXT_PUBLIC_API}posts/${context.params.id}`)
     .then(posts => posts.json());
 
   return {
@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await fetch(`http://localhost:3333/posts/`)
+  const posts = await fetch(`${process.env.NEXT_PUBLIC_API}posts`)
     .then(posts => posts.json());
 
   const postsPaths = posts.map(post => {
