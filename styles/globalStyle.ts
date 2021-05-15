@@ -8,6 +8,8 @@ html,
     margin: 0;
     font-family: 'Titillium Web', sans-serif;
     line-height: 1.2;
+    background: ${props => props.theme.background};
+    color: ${props => props.theme.text};
 }
 
 a {

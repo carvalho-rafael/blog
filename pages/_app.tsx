@@ -1,13 +1,14 @@
 
 import GlobalStyle from "../styles/globalStyle"
-import { Theme } from '../styles/theme'
-import { ThemeProvider } from 'styled-components'
 
 import Router from "next/router";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import ThemeSwitchProvider, { CustomThemeContext } from "../contexts/customThemeProvider";
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = React.useState(false);
+  const { theme } = useContext(CustomThemeContext);
+
   React.useEffect(() => {
     const start = () => {
       setLoading(true);
@@ -35,10 +36,10 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-        <ThemeProvider theme={Theme}>
+      <ThemeSwitchProvider>
           <Component {...pageProps} />
           <GlobalStyle />
-        </ThemeProvider>
+      </ThemeSwitchProvider>
     </>
   );
 }
