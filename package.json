@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "server": "json-server server.json -w -p 3333 -d 1000",
+    "server": "json-server server.json -w -p 3333 -d 3000",
     "test": "jest"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.5.1",
     "draft-js": "^0.11.7",
     "next": "10.1.2",
