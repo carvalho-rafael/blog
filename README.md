@@ -8,3 +8,4 @@ Visit: https://portfolio-blog.carvalhorafael.dev.br/
 - Typescript
 - Styled-components
 - json-server
+- Material-ui
