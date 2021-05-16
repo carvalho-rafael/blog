@@ -9,7 +9,7 @@ export default function Post({ posts }) {
   return (
     <>
       <Head>
-        <title>{posts.title}</title>
+        <title>Blog - {posts.title}</title>
       </Head>
       <NavBar />
       <PostContainer>
