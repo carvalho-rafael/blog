@@ -2,25 +2,33 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import React from 'react';
 import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheets } from '@material-ui/styles';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const sheet = new ServerStyleSheet();
+    const muiSheet = new ServerStyleSheets();
+    const styledComponentSheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
+          enhanceApp: App => props => styledComponentSheet.collectStyles(muiSheet.collect(<App {...props} />)),
         });
 
       const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
-        styles: [...React.Children.toArray(initialProps.styles), sheet.getStyleElement()],
+        styles: (
+          <React.Fragment>
+            {initialProps.styles}
+            {muiSheet.getStyleElement()}
+            {styledComponentSheet.getStyleElement()}
+          </React.Fragment>
+        )
       };
     } finally {
-      sheet.seal();
+      styledComponentSheet.seal();
     }
   }
 
@@ -28,9 +36,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet" />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="stylesheet" href="/fonts.css" />
         </Head>
         <body>
           <Main />
