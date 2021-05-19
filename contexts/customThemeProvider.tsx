@@ -1,6 +1,8 @@
 import { createContext, useState } from "react";
 import { lightTheme, darkTheme } from '../styles/theme'
 import { ThemeProvider } from 'styled-components'
+import { MuiThemeProvider } from "@material-ui/core";
+import muiTheme from '../styles/muiTheme'
 
 type CustomThemeContextData = {
     theme: string,
@@ -23,7 +25,9 @@ export default function CustomThemeProvider({ children }) {
                 toggleTheme
             }}>
             <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-                {children}
+                <MuiThemeProvider theme={muiTheme}>
+                    {children}
+                </MuiThemeProvider>
             </ThemeProvider>
         </CustomThemeContext.Provider>
     )
