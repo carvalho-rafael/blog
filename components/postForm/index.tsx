@@ -11,29 +11,45 @@ interface PostFormProps {
 }
 
 export default function PostForm({ post }: PostFormProps) {
-    const name = useRef<HTMLInputElement>();
+    const title = useRef<HTMLInputElement>();
+    const description = useRef<HTMLInputElement>();
+    const body = useRef<HTMLInputElement>();
+    const cover = useRef<HTMLInputElement>();
+    const createdAt = useRef<HTMLInputElement>();
 
-    const { loading, handleEdit } = useForm();
+    const { loading, handleEdit, handleCreate } = useForm();
 
 
-    function handleSubmit(event) {
-        event.preventDefault()
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        const newPost = {
+            title: title.current.value,
+            description: description.current.value,
+            body: "Initial value",
+            cover: "cover.jpg",
+            createdAt: "Sat May 01 2021"
+        }
+
         if (post) {
+            const updatedPost = {
+                ...post,
+                ...newPost
+            }
+
             handleEdit(post)
         } else {
-            console.log("criação")
+            handleCreate(newPost)
         }
     }
+
     return (
         <>
             <FormContainer onSubmit={handleSubmit}>
-                <InputGroup>
-                    <Input name="title" label="title" type="text" ref={name} required />
-                    <Select label="categories" categories={['science', 'tecnology']}  />
-                </InputGroup>
-                <Input name="nme" label="Name" ref={name} required />
+                <Input name="title" label="title" type="text" ref={title} />
+                <Input name="description" label="Description" ref={description} />
                 <TextEditor />
-                <button type='submit' disabled={loading}>Enviar</button>
+                <button type='submit' disabled={loading}>Send</button>
             </FormContainer>
         </>
     )

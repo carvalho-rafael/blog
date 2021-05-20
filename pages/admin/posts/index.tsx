@@ -3,6 +3,7 @@ import Admin from '..';
 
 import { PostsContainer, PostItem } from '../../../styles/admin/admin'
 import Link from 'next/link';
+import { Button } from '@material-ui/core';
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
@@ -19,6 +20,9 @@ export default function Posts() {
   return (
     <>
       <Admin title="Posts">
+        <Link href={`/admin/posts/create`}>
+          <a><Button>New Product</Button></a>
+        </Link>
         <PostsContainer>
           <h1>Posts</h1>
           {posts.map(post => (

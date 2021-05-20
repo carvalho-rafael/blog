@@ -1,18 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Post } from "../interfaces/Post";
 
 export default function useForm() {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
-    function handleEdit(post: Post) {
-        console.log("edição do hook", post)
-
+    async function handleEdit(post: Post) {
+        console.log('edit call')
     }
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 2000);
-    }, [])
 
-    return {loading, handleEdit}
+    async function handleCreate(post: Post) {
+        const create = await fetch('/api/posts', {
+            headers: {
+                'Content-type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(post),
+        })
+            .then(data => data.json());
+        console.log(create)
+    }
+
+    return { loading, handleEdit, handleCreate }
 }
