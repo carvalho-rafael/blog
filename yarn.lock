@@ -799,10 +799,10 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/draft-js@^0.11.1":
-  version "0.11.2"
-  resolved "https://registry.yarnpkg.com/@types/draft-js/-/draft-js-0.11.2.tgz#0b3b78a61f186a4cb48c0ad8b059275200a53c63"
-  integrity sha512-oETFZPBenedmGD1wzuRWv0sMBvM1Whj2kX/oyJbPdzOaDPQ1FHOS4NoDONLlHIDiak6n2z9Pbfq04yY46Tni7Q==
+"@types/draft-js@^0.11.3":
+  version "0.11.3"
+  resolved "https://registry.yarnpkg.com/@types/draft-js/-/draft-js-0.11.3.tgz#8110c143e0ab419c04f749480b313e6ccc8713bb"
+  integrity sha512-+A1+E/Bg+IGCAECon8RZYR7SlJrVCsq+JxbCPyXiis0RoHSPNjbbXGVyU/EAsk8iBdKcatio7KXaTqP7+lmcug==
   dependencies:
     "@types/react" "*"
     immutable "~3.7.4"
@@ -2237,6 +2237,18 @@ dot-prop@^5.2.0:
   integrity sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==
   dependencies:
     is-obj "^2.0.0"
+
+draft-js-export-html@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/draft-js-export-html/-/draft-js-export-html-1.4.1.tgz#7cdad970c6f7f2cdd19ce4c1f5073fdf0f313b4d"
+  integrity sha512-G4VGBSalPowktIE4wp3rFbhjs+Ln9IZ2FhXeHjsZDSw0a2+h+BjKu5Enq+mcsyVb51RW740GBK8Xbf7Iic51tw==
+  dependencies:
+    draft-js-utils "^1.4.0"
+
+draft-js-utils@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/draft-js-utils/-/draft-js-utils-1.4.0.tgz#c60af198108f69b0f1df3572555b23836819d1cf"
+  integrity sha512-8s9FFuKC+lOWGwJ0b3om2PF+uXrqQPaEQlPJI7UxdzxTYGMeKouMPA9+YlPn52zcAVElIZtd2tXj6eQmvlKelw==
 
 draft-js@^0.11.7:
   version "0.11.7"

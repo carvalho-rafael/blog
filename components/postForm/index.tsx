@@ -1,9 +1,11 @@
+import { convertFromHTML, convertFromRaw, convertToRaw, Editor } from "draft-js";
+import { stateToHTML } from 'draft-js-export-html'
 import { useRef } from "react";
 import useForm from "../../hooks/useForm";
 import { Post } from "../../interfaces/Post";
 import Input from "./Input";
-import Select from "./select";
-import { FormContainer, InputGroup } from "./styles";
+import { FormContainer } from "./styles";
+import TextArea from "./textArea";
 import TextEditor from "./TextEditor";
 
 interface PostFormProps {
@@ -12,8 +14,8 @@ interface PostFormProps {
 
 export default function PostForm({ post }: PostFormProps) {
     const title = useRef<HTMLInputElement>();
-    const description = useRef<HTMLInputElement>();
-    const body = useRef<HTMLInputElement>();
+    const description = useRef<HTMLTextAreaElement>();
+    const body = useRef<Editor>(null);
     const cover = useRef<HTMLInputElement>();
     const createdAt = useRef<HTMLInputElement>();
 
@@ -26,7 +28,7 @@ export default function PostForm({ post }: PostFormProps) {
         const newPost = {
             title: title.current.value,
             description: description.current.value,
-            body: "Initial value",
+            body: JSON.stringify(convertToRaw(body.current.props.editorState.getCurrentContent())),
             cover: "cover.jpg",
             createdAt: "Sat May 01 2021"
         }
@@ -36,8 +38,7 @@ export default function PostForm({ post }: PostFormProps) {
                 ...post,
                 ...newPost
             }
-
-            handleEdit(post)
+            handleEdit(updatedPost)
         } else {
             handleCreate(newPost)
         }
@@ -46,9 +47,9 @@ export default function PostForm({ post }: PostFormProps) {
     return (
         <>
             <FormContainer onSubmit={handleSubmit}>
-                <Input name="title" label="title" type="text" ref={title} />
-                <Input name="description" label="Description" ref={description} />
-                <TextEditor />
+                <Input name="title" label="title" type="text" defaultValue={post?.title} ref={title} />
+                <TextArea name="description" label="Description" defaultValue={post?.description} ref={description} />
+                <TextEditor data={post?.body} ref={body} />
                 <button type='submit' disabled={loading}>Send</button>
             </FormContainer>
         </>

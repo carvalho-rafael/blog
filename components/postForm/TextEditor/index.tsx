@@ -1,14 +1,28 @@
-import { useState } from 'react';
-import { Editor, EditorState, RichUtils } from 'draft-js';
+import { ForwardRefRenderFunction, useEffect, useState } from 'react';
+import { ContentState, convertFromHTML, convertFromRaw, convertToRaw, Editor, EditorState, RichUtils } from 'draft-js';
 import 'draft-js/dist/Draft.css';
+import React from 'react';
 
-export default function MyEditor() {
+type MyEditorProps = {
+    data: string
+}
+
+const MyEditor: ForwardRefRenderFunction<Editor, MyEditorProps> = ({ data }, ref) => {
     const [editorState, setEditorState] = useState(
-        () => EditorState.createEmpty(),
+        () => {
+            return data ?
+                EditorState.createWithContent(ContentState.createFromText(data))
+                : EditorState.createEmpty()
+        }
     );
 
+    useEffect(() => {
+        data &&
+            setEditorState(EditorState.createWithContent((convertFromRaw(JSON.parse(data)))))
+    }, [data])
+
     const onChange = (newState) => setEditorState(newState);
-    
+
     function _toggleBlockType(blockType) {
         onChange(
             RichUtils.toggleBlockType(
@@ -41,14 +55,18 @@ export default function MyEditor() {
         );
     };
 
-    return <div>
-        <BlockStyleControls
-            editorState={editorState}
-            onToggle={_toggleBlockType}
-        />
-        <Editor editorState={editorState} onChange={onChange} />
-    </div>
+    return (
+        <div>
+            <BlockStyleControls
+                editorState={editorState}
+                onToggle={_toggleBlockType}
+            />
+            <Editor ref={ref} editorState={editorState} onChange={onChange} />
+        </div>
+    )
 }
+
+export default React.forwardRef(MyEditor);
 
 const BLOCK_TYPES = [
     { label: 'H1', style: 'header-one' },
@@ -71,7 +89,7 @@ const StyleButton = ({ onToggle, active, label, style }) => {
     };
 
     return (
-        <span style={{display: 'inline-block', padding: '1rem', background: active ? '#d2d3d5': '#f2f3f4'}} onMouseDown={toggle}>
+        <span style={{ display: 'inline-block', padding: '1rem', background: active ? '#d2d3d5' : '#f2f3f4' }} onMouseDown={toggle}>
             {label}
         </span>
 

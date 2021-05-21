@@ -1,3 +1,5 @@
+import { convertFromRaw } from 'draft-js';
+import { stateToHTML } from 'draft-js-export-html';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head'
 import NavBar from '../../../components/navbar'
@@ -19,7 +21,7 @@ export default function Post({ posts }) {
           <time dateTime={posts.createdAt}>{posts.createdAt}</time>
           <hr />
         </PostHeader>
-        <p dangerouslySetInnerHTML={{ __html: posts.body }}></p>
+        <div dangerouslySetInnerHTML={{ __html: stateToHTML(convertFromRaw(JSON.parse(posts.body)))}}></div>
       </PostContainer>
     </>
   )
