@@ -5,7 +5,15 @@ export default function useForm() {
     const [loading, setLoading] = useState(false);
 
     async function handleEdit(post: Post) {
-        console.log('edit call')
+        const update = await fetch('/api/posts', {
+            headers: {
+                'Content-type': 'application/json'
+            },
+            method: "PUT",
+            body: JSON.stringify(post),
+        })
+            .then(data => data.json());
+        console.log(update)
     }
 
     async function handleCreate(post: Post) {
